@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "DeepWork Clocker": {
+      "applicationId": "c2CLmzJBHw8cPD6gvehLa5FwUjuCgHtBxWiUhU25"
+    },
+    "_default": {
+      "link": "DeepWork Clocker"
+    }
+  }
+}
