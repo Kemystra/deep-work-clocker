@@ -1,0 +1,23 @@
+{
+  "name": "deepwork-clocker",
+  "version": "1.0.0",
+  "description": "Track deep work with a collection of APIs and a website to show them",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kemystra/deep-work-clocker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kemystra/deep-work-clocker/issues"
+  },
+  "homepage": "https://github.com/Kemystra/deep-work-clocker#readme",
+  "dependencies": {
+    "parse": "^4.0.0"
+  }
+}
