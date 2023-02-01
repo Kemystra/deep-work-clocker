@@ -7,6 +7,10 @@ Parse.initialize(
 
 Parse.serverURL = "https://parseapi.back4app.com/";
 
+if(Parse.User.current()) {
+    document.getElementById("login-panel").classList.add("hide")
+}
+
 document.getElementById("login-form").onsubmit = async e => {
     e.preventDefault();
 

@@ -26,6 +26,7 @@ body {
     align-items: center;
 
     background-color: blue;
+    transition: all 0.5s ease-in-out;
 }
 
 #login-form {
@@ -33,4 +34,8 @@ body {
     border-radius: 5px;
 
     padding: 1rem;
+}
+
+.hide {
+    top: -100vh !important;
 }
