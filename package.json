@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "watch": "webpack serve --config webpack.config.js"
+    "watch": "webpack serve --config webpack.config.js",
+    "deploy": "npm run build && b4a deploy"
   },
   "author": "Izzminhal Akmal",
   "license": "ISC",
