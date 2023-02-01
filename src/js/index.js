@@ -1,5 +1,3 @@
-import Parse from 'parse/node'
-
 import "../scss/master.scss"
 
 Parse.initialize(
