@@ -28,6 +28,27 @@ document.getElementById("login-form").onsubmit = async e => {
     }
 }
 
+document.getElementById("get_today").onclick = getTodayObject;
+
+async function getTodayObject() {
+    const query = new Parse.Query("DeepHour");
+
+	// Get only the object with that were created today
+	// Setting the hours right at midnight
+	query.greaterThan('createdAt', (new Date()).setHours(0,0,0,0));
+
+	try {
+		let result = await query.find();
+		console.log(result);
+        return result;
+	} catch (error) {
+		console.error(error);
+        return;
+	}
+}
+
+
+
 function hideLoginPanel() {
     document.getElementById("login-panel").classList.add("hide");
 }
