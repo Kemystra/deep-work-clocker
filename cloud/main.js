@@ -4,3 +4,7 @@
 Parse.Cloud.define("hello", (request) => {
 	return "Hello world!";
 });
+
+Parse.Cloud.define("add_hours", async request => {
+	
+});
