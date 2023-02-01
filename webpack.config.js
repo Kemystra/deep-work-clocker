@@ -40,5 +40,8 @@ module.exports = {
     },
     devServer: {
         static: path.resolve(__dirname, "./public")
+    },
+    externals: {
+        parse: 'parse'
     }
 }
