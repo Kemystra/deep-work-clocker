@@ -6,5 +6,5 @@ Parse.Cloud.define("hello", (request) => {
 });
 
 Parse.Cloud.define("add_hours", async request => {
-	
+	const query = new Parse.Query("DeepHour")
 });
