@@ -8,7 +8,7 @@ Parse.initialize(
 Parse.serverURL = "https://parseapi.back4app.com/";
 
 if(Parse.User.current()) {
-    document.getElementById("login-panel").classList.add("hide")
+    hideLoginPanel();
 }
 
 document.getElementById("login-form").onsubmit = async e => {
@@ -21,7 +21,13 @@ document.getElementById("login-form").onsubmit = async e => {
         let user = await Parse.User.logIn(username, passwd);
         console.log("Logged in!");
         console.table(user);
+
+        hideLoginPanel();
     } catch (error) {        
         console.error(error);
     }
+}
+
+function hideLoginPanel() {
+    document.getElementById("login-panel").classList.add("hide");
 }
