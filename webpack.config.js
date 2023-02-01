@@ -13,7 +13,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin")
 const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-    entry: "./src/jsx/index.jsx",
+    entry: "./src/js/index.js",
     mode: "production",
     output: {
         filename: "main.js",
@@ -21,12 +21,6 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.jsx$/,
-                exclude: /node_modules/,
-                use: ["babel-loader"]
-            },
-
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
