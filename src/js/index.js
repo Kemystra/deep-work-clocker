@@ -1,5 +1,9 @@
 import "../scss/master.scss"
 
+// Login system
+import { normalLogin, sessionTokenLogin } from "./login.js";
+import { hideLoginPanel } from "./hide_login.js";
+
 Parse.initialize(
     "c2CLmzJBHw8cPD6gvehLa5FwUjuCgHtBxWiUhU25", // App. ID
     "LdSZCyRhg7nn7rYNw8c5TylpOHaxeF5uqYgjeLtT" // JS key
@@ -8,17 +12,28 @@ Parse.initialize(
 Parse.serverURL = "https://parseapi.back4app.com/";
 
 window.onload = () => {
-
-
-    // Hide login panel if token is retrieved and valid
-    if(Parse.User.current()) {
-        hideLoginPanel();
+    // Retrieve from cookie first
+    let sessionToken;
+    let cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.startsWith("userToken=")) {
+            // Get the value part (damn ChatGPT)
+            sessionToken = cookie.substring("userToken=".length, cookie.length);
+        }
     }
+
+    // Use the function to 'become' the user
+    sessionTokenLogin(sessionToken).then(() => {
+        // Hide login panel if token is retrieved and valid
+        if(Parse.User.current()) {
+            hideLoginPanel();
+        }
+    })
 }
 
-document.getElementById("login-form").onsubmit = async e => {
-    
-}
+// Listen for login events
+document.getElementById("login-form").onsubmit = normalLogin;
 
 document.getElementById("get-today").onclick = getTodayObject;
 
@@ -70,7 +85,3 @@ async function addHours() {
 }
 
 document.getElementById("add-hours").onclick = addHours;
-
-function hideLoginPanel() {
-    document.getElementById("login-panel").classList.add("hide");
-}
