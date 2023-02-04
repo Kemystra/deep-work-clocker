@@ -7,35 +7,30 @@ Parse.initialize(
 
 Parse.serverURL = "https://parseapi.back4app.com/";
 
-if(Parse.User.current()) {
-    hideLoginPanel();
-}
+window.onload = () => {
 
-document.getElementById("login-form").onsubmit = async e => {
-    e.preventDefault();
 
-    let username = e.target["0"].value;
-    let passwd = e.target["1"].value;
-
-    try {
-        let user = await Parse.User.logIn(username, passwd);
-        console.log("Logged in!");
-        console.table(user);
-
+    // Hide login panel if token is retrieved and valid
+    if(Parse.User.current()) {
         hideLoginPanel();
-    } catch (error) {        
-        console.error(error);
     }
 }
 
-document.getElementById("get_today").onclick = getTodayObject;
+document.getElementById("login-form").onsubmit = async e => {
+    
+}
+
+document.getElementById("get-today").onclick = getTodayObject;
 
 async function getTodayObject() {
     const query = new Parse.Query("DeepHour");
 
 	// Get only the object with that were created today
-	// Setting the hours right at midnight
-	query.greaterThan('createdAt', (new Date()).setHours(0,0,0,0));
+    let todayDate = new Date();
+    // Set the hours to midnight
+    // So that any work registered after that will be displayed
+    todayDate.setHours(0,0,0,0);
+	query.greaterThan('createdAt', todayDate);
 
 	try {
 		let result = await query.find();
@@ -43,11 +38,38 @@ async function getTodayObject() {
         return result;
 	} catch (error) {
 		console.error(error);
-        return;
+        return [];
 	}
 }
 
+async function addHours() {
+    const todayObjectArr = await getTodayObject();
 
+    if(todayObjectArr === []) {
+        console.log("obj is empty");
+    }
+    else {
+        try {
+            const query = new Parse.Query("DeepHour");
+            // There should only be one object per day
+            let todayObject = await todayObjectArr[0];
+            const object = await query.get(todayObject.id);
+            object.set("total", 20);
+
+            try {
+                const resp = await object.save();
+                console.log("Updated!")
+                console.log(resp);
+            } catch (error) {
+                console.error("Error in updating ", error);
+            }
+        } catch (error) {
+            console.error("Error while retrieving ", error);
+        }
+    }
+}
+
+document.getElementById("add-hours").onclick = addHours;
 
 function hideLoginPanel() {
     document.getElementById("login-panel").classList.add("hide");
