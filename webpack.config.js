@@ -14,7 +14,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
     entry: "./src/js/index.js",
-    mode: "production",
+    mode: process.env.MODE,
     output: {
         filename: "main.js",
         path: path.resolve(__dirname, "./public")
