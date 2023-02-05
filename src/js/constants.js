@@ -1,0 +1,1 @@
+export const DEEP_HOUR_CLASS = "DeepHour";
