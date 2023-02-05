@@ -1,5 +1,8 @@
 import "../scss/master.scss"
 
+// Constants
+import { DEEP_HOUR_CLASS } from "./constants.js";
+
 // Login system
 import { normalLogin, sessionTokenLogin } from "./login.js";
 import { hideLoginPanel } from "./hide_login.js";
@@ -38,7 +41,7 @@ document.getElementById("login-form").onsubmit = normalLogin;
 document.getElementById("get-today").onclick = getTodayObject;
 
 async function getTodayObject() {
-    const query = new Parse.Query("DeepHour");
+    const query = new Parse.Query(DEEP_HOUR_CLASS);
 
 	// Get only the object with that were created today
     let todayDate = new Date();
@@ -60,12 +63,16 @@ async function getTodayObject() {
 async function addHours() {
     const todayObjectArr = await getTodayObject();
 
-    if(todayObjectArr === []) {
+    if(todayObjectArr.length === 0) {
         console.log("obj is empty");
+
+        // Create new Parse Object
+        const newTodayObject = new Parse.Object(DEEP_HOUR_CLASS);
     }
     else {
         try {
-            const query = new Parse.Query("DeepHour");
+            const query = new Parse.Query(DEEP_HOUR_CLASS);
+
             // There should only be one object per day
             let todayObject = await todayObjectArr[0];
             const object = await query.get(todayObject.id);
