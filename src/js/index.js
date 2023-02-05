@@ -1,16 +1,13 @@
 import "../scss/master.scss"
 
 // Constants
-import { DEEP_HOUR_CLASS } from "./constants.js";
+import { DEEP_HOUR_CLASS, APP_ID, JS_KEY } from "./constants.js";
 
 // Login system
 import { normalLogin, sessionTokenLogin } from "./login.js";
 import { hideLoginPanel } from "./hide_login.js";
 
-Parse.initialize(
-    "c2CLmzJBHw8cPD6gvehLa5FwUjuCgHtBxWiUhU25", // App. ID
-    "LdSZCyRhg7nn7rYNw8c5TylpOHaxeF5uqYgjeLtT" // JS key
-);
+Parse.initialize(APP_ID, JS_KEY);
 
 Parse.serverURL = "https://parseapi.back4app.com/";
 
